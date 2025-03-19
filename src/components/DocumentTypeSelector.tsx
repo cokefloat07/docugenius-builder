@@ -1,11 +1,8 @@
-
 import { useEffect } from 'react';
 import { FileText, FilePlus, FileBarChart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useDocumentStore, DocumentType } from '@/store/documentStore';
-
-<lov-add-dependency>framer-motion@latest</lov-add-dependency>
 
 const DocumentTypeSelector = () => {
   const { setDocumentType, nextStep } = useDocumentStore();
