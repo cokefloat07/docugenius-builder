@@ -44,16 +44,26 @@ const DocumentForm = () => {
       setIsGenerating(true);
       setLoading(true);
       
+      toast({
+        title: "Generating document",
+        description: "Please wait while we create your document...",
+      });
+      
       const content = await generateDocumentContent(documentType!, projectDetails);
       setGeneratedContent(content);
       setLoading(false);
       nextStep();
+      
+      toast({
+        title: "Document created",
+        description: "Your document has been generated successfully!",
+      });
     } catch (error) {
       console.error('Error generating document:', error);
       setLoading(false);
       toast({
         title: "Generation Failed",
-        description: "An error occurred while generating your document. Please try again later.",
+        description: "An error occurred with the Gemini API. Please check the console for details and try again later.",
         variant: "destructive"
       });
     } finally {

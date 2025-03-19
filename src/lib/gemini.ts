@@ -18,7 +18,8 @@ export const generateDocumentContent = async (
   }
 ) => {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    // Update to use the correct model name - the console error shows 'gemini-pro' isn't available in v1beta
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
 
     // Create a prompt based on document type and project details
     const prompt = createPromptForDocumentType(documentType, projectDetails);
