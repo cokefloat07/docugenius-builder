@@ -1,13 +1,11 @@
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// This is a placeholder API key. Users will need to provide their own API key.
-let apiKey = '';
+// Using the provided API key
+const apiKey = 'AIzaSyAjbFZfj9vHVFr5AEml4eejHirKaA5VTBw';
 
-export const initializeGeminiApi = (key: string) => {
-  apiKey = key;
-  return new GoogleGenerativeAI(apiKey);
-};
+// Initialize the Gemini API with the provided key
+const genAI = new GoogleGenerativeAI(apiKey);
 
 export const generateDocumentContent = async (
   documentType: string,
@@ -19,12 +17,7 @@ export const generateDocumentContent = async (
     audience: string;
   }
 ) => {
-  if (!apiKey) {
-    throw new Error('API key not configured. Please set your Gemini API key.');
-  }
-
   try {
-    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
     // Create a prompt based on document type and project details

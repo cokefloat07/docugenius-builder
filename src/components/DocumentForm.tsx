@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -12,7 +12,6 @@ import { generateDocumentContent } from '@/lib/gemini';
 import { useToast } from '@/hooks/use-toast';
 
 const DocumentForm = () => {
-  const [apiKey, setApiKey] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const { toast } = useToast();
   
@@ -41,16 +40,6 @@ const DocumentForm = () => {
       return;
     }
     
-    // Validate API key
-    if (!apiKey) {
-      toast({
-        title: "API Key Required",
-        description: "Please enter your Gemini API key to generate content.",
-        variant: "destructive"
-      });
-      return;
-    }
-    
     try {
       setIsGenerating(true);
       setLoading(true);
@@ -64,7 +53,7 @@ const DocumentForm = () => {
       setLoading(false);
       toast({
         title: "Generation Failed",
-        description: "An error occurred while generating your document. Please check your API key and try again.",
+        description: "An error occurred while generating your document. Please try again later.",
         variant: "destructive"
       });
     } finally {
@@ -156,21 +145,6 @@ const DocumentForm = () => {
                 onChange={(e) => updateProjectDetails({ audience: e.target.value })}
                 className="mt-1"
               />
-            </div>
-            
-            <div className="pt-2">
-              <Label htmlFor="apiKey">Gemini API Key</Label>
-              <Input
-                id="apiKey"
-                type="password"
-                placeholder="Enter your Gemini API key"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="mt-1"
-              />
-              <p className="text-xs text-muted-foreground mt-1">
-                Get a free API key from <a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Google AI Studio</a>
-              </p>
             </div>
           </div>
           
